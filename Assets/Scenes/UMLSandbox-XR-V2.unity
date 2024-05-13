@@ -2470,14 +2470,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   vrPlayer: {fileID: 916852049}
   backwardWalkAngle: 10
-  backwardSprintAngle: 25
-  backwardWowAngle: 50
-  forwardWalkAngle: 357
-  forwardSprintAngle: 354
-  forwardWowAngle: 350
+  backwardSprintAngle: 20
+  backwardWowAngle: 45
+  forwardWalkAngle: 350
+  forwardSprintAngle: 340
+  forwardWowAngle: 315
   walkSpeed: 3
   sprintSpeed: 9
-  wowSpeed: 45
+  wowSpeed: 50
   moveForward: 0
   moveBackward: 0
   isInverted: 0

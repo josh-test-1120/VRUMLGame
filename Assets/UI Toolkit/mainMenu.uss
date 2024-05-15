@@ -1,0 +1,48 @@
+.header {
+    margin-top: 100px;
+    -unity-text-align: upper-center;
+    font-size: 60px;
+    color: rgb(27, 65, 27);
+    -unity-font-style: bold;
+    -unity-font: url("project://database/Packages/com.unity.render-pipelines.core/Runtime/Debugging/Prefabs/Fonts/PerfectDOSVGA437.ttf?fileID=12800000&guid=74a5091d8707f334b9a5c31ef71a64ba&type=3#PerfectDOSVGA437");
+}
+
+.button {
+    padding-top: 0;
+    padding-right: 0;
+    padding-bottom: 0;
+    padding-left: 0;
+    margin-right: 10px;
+    width: 150px;
+    height: 50px;
+    -unity-text-align: upper-center;
+    align-self: flex-end;
+    align-items: auto;
+}
+
+.option {
+    background-color: rgba(248, 244, 244, 0.22);
+    width: 140px;
+}
+
+.groupbox {
+    border-top-left-radius: 20px;
+    border-top-right-radius: 20px;
+    border-bottom-right-radius: 20px;
+    border-bottom-left-radius: 20px;
+    border-left-width: 0;
+    padding-left: 0;
+    margin-left: 20px;
+    margin-top: 100px;
+}
+
+.classButton {
+    width: 80px;
+    height: 80px;
+}
+
+.optionsbutton {
+    font-size: 16px;
+    background-color: rgba(190, 178, 178, 0.14);
+    -unity-font-style: bold;
+}

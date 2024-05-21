@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.18018535, g: 0.22559482, b: 0.30677685, a: 1}
+  m_IndirectSpecularColor: {r: 0.18028326, g: 0.22571333, b: 0.30692202, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -288,6 +288,7 @@ GameObject:
   - component: {fileID: 916852051}
   - component: {fileID: 916852050}
   - component: {fileID: 916852053}
+  - component: {fileID: 916852054}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -516,12 +517,25 @@ MonoBehaviour:
   m_RequiresColorTexture: 0
   m_Version: 2
   m_TaaSettings:
-    quality: 3
-    frameInfluence: 0.1
-    jitterScale: 1
-    mipBias: 0
-    varianceClampScale: 0.9
-    contrastAdaptiveSharpening: 0
+    m_Quality: 3
+    m_FrameInfluence: 0.1
+    m_JitterScale: 1
+    m_MipBias: 0
+    m_VarianceClampScale: 0.9
+    m_ContrastAdaptiveSharpening: 0
+--- !u!114 &916852054
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 916852048}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 460977f34b07e43c194346d051215586, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  freezeCamera: 0
 --- !u!1001 &1064117564
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1642,6 +1656,69 @@ MonoBehaviour:
       m_Flags: 0
     m_Reference: {fileID: 0}
   m_ButtonPressPoint: 0.5
+--- !u!1 &1734367923
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1734367925}
+  - component: {fileID: 1734367924}
+  - component: {fileID: 1734367926}
+  m_Layer: 5
+  m_Name: HUD
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1734367924
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1734367923}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 19102, guid: 0000000000000000e000000000000000, type: 0}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_PanelSettings: {fileID: 11400000, guid: 6daa04fc9966a45b8992a23694d5c1d7, type: 2}
+  m_ParentUI: {fileID: 0}
+  sourceAsset: {fileID: 9197481963319205126, guid: 155d4fbe0c9c1414684fd9dd6267fb0a, type: 3}
+  m_SortingOrder: 0
+--- !u!4 &1734367925
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1734367923}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1734367926
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1734367923}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a67bdb5704b814092bb38809cd510d53, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _assignedPlayer: {fileID: 2086360909}
+  _assignedCamera: {fileID: 916852052}
 --- !u!1 &1936358036
 GameObject:
   m_ObjectHideFlags: 0
@@ -2357,6 +2434,7 @@ GameObject:
   - component: {fileID: 2086360905}
   - component: {fileID: 2086360903}
   - component: {fileID: 2086360908}
+  - component: {fileID: 2086360909}
   m_Layer: 0
   m_Name: VRPlayer
   m_TagString: Untagged
@@ -2470,17 +2548,29 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   vrPlayer: {fileID: 916852049}
   backwardWalkAngle: 10
-  backwardSprintAngle: 25
-  backwardWowAngle: 50
-  forwardWalkAngle: 357
-  forwardSprintAngle: 354
-  forwardWowAngle: 350
+  backwardSprintAngle: 20
+  backwardWowAngle: 45
+  forwardWalkAngle: 350
+  forwardSprintAngle: 340
+  forwardWowAngle: 315
   walkSpeed: 3
   sprintSpeed: 9
-  wowSpeed: 45
+  wowSpeed: 50
   moveForward: 0
   moveBackward: 0
   isInverted: 0
+--- !u!114 &2086360909
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2086360902}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3923c0fe81124480a81ff599bb21f7d0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &2106722895
 GameObject:
   m_ObjectHideFlags: 0
@@ -2571,3 +2661,4 @@ SceneRoots:
   - {fileID: 1334206756}
   - {fileID: 1250964960}
   - {fileID: 2086360907}
+  - {fileID: 1734367925}

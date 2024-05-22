@@ -24,6 +24,7 @@ using UnityEngine;
 /// </summary>
 public class CardboardStartup : MonoBehaviour
 {
+    private int _buttonCounter;
     /// <summary>
     /// Start is called before the first frame update.
     /// </summary>
@@ -40,6 +41,9 @@ public class CardboardStartup : MonoBehaviour
         {
             Api.ScanDeviceParams();
         }
+        // Set the button held timer to a lower setting
+        Api.MinTriggerHeldPressedTime = 1.0;
+        _buttonCounter = 0;
     }
 
     /// <summary>
@@ -59,12 +63,21 @@ public class CardboardStartup : MonoBehaviour
 
         if (Api.IsTriggerHeldPressed)
         {
-            Debug.Log("button pressed");
+            Debug.Log("button pressed and held");
+            Debug.Log($"This is the hold time: {Api.MinTriggerHeldPressedTime}");
+            //Api.MinTriggerHeldPressedTime = 0.25;
+            //Messenger.Broadcast(GameEvent.UML_PANEL_BUTTON);
             Api.Recenter();
         }
         if (Api.IsTriggerPressed)
         {
-            Debug.Log("button pressed");
+            if (_buttonCounter > 10)
+            {
+                _buttonCounter = 0;
+                Messenger.Broadcast(GameEvent.UML_PANEL_BUTTON);
+            }
+            _buttonCounter++;
+            Debug.Log("simple button press");
             //Api.Recenter();
         }
         if (Api.HasNewDeviceParams())

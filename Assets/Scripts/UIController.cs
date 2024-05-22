@@ -27,13 +27,17 @@ public class UIController : MonoBehaviour
     void OnEnable()
     {
         Messenger.AddListener(GameEvent.ENEMY_HIT, OnEnemyHit);
-        Messenger.AddListener(GameEvent.CLOSE_UML_PANEL, CloseWindows);
+        Messenger.AddListener(GameEvent.CLOSE_UML_PANEL, CloseUMLView);
+        Messenger.AddListener(GameEvent.OPEN_UML_PANEL, OpenUMLView);
+        Messenger.AddListener(GameEvent.UML_PANEL_BUTTON, UMLButton);
     }
 
     private void OnDisable()
     {
         Messenger.RemoveListener(GameEvent.ENEMY_HIT, OnEnemyHit);
-        Messenger.RemoveListener(GameEvent.CLOSE_UML_PANEL, CloseWindows);
+        Messenger.RemoveListener(GameEvent.CLOSE_UML_PANEL, CloseUMLView);
+        Messenger.RemoveListener(GameEvent.OPEN_UML_PANEL, OpenUMLView);
+        Messenger.RemoveListener(GameEvent.UML_PANEL_BUTTON, UMLButton);
     }
 
     // Start is called before the first frame update
@@ -59,7 +63,7 @@ public class UIController : MonoBehaviour
 
         //_scoreTextField.text = _scoreTextString + _score.ToString();
 
-        _umlPanel.Close();
+        //_umlPanel.Close();
 
         //UnityEngine.Cursor.lockState = CursorLockMode.Locked;
         //UnityEngine.Cursor.visible = false;
@@ -78,10 +82,12 @@ public class UIController : MonoBehaviour
             //MouseLook mousePlayer = _assignedPlayer.GetComponent<MouseLook>();
             //MouseLook mouseCamera = _assignedCamera.GetComponent<MouseLook>();
             //RayShooter rayHandler = _assignedCamera.GetComponent<RayShooter>();
+            if (Api.IsTriggerHeldPressed) Debug.Log("button pressed and held");
+            if (Api.IsTriggerPressed) Debug.Log("simple button press");
             // Check for GUI escape press
-            if (Input.GetKeyDown(KeyCode.Escape) || Api.IsTriggerPressed)
+            if (Input.GetKeyDown(KeyCode.Escape) || Api.IsTriggerHeldPressed)
             {
-                Debug.Log("button pressed");
+                Debug.Log("button pressed and held");
                 if (_hudGUIMode)
                 {
                     CloseWindows();
@@ -99,7 +105,7 @@ public class UIController : MonoBehaviour
 
                 TrackedPoseDriver trackedPose = _assignedCamera.GetComponent<TrackedPoseDriver>();
                 //trackedPose.
-                InputTracking.disablePositionalTracking = true;
+                //InputTracking.disablePositionalTracking = true;
                 _umlPanel.Open();
                 //UnityEngine.Cursor.visible = true;
 
@@ -116,6 +122,9 @@ public class UIController : MonoBehaviour
                 //mouseCamera.freezeCamera = false;
                 //rayHandler.freezeCamera = false;
             }
+            #if !UNITY_EDITOR
+                Api.UpdateScreenParams();
+            #endif
         }
     }
 
@@ -171,7 +180,66 @@ public class UIController : MonoBehaviour
         canvasGroup.interactable = false;
         Debug.Log("This is the close button");
         TrackedPoseDriver trackedPose = _assignedCamera.GetComponent<TrackedPoseDriver>();
-        InputTracking.disablePositionalTracking = false;
+        //InputTracking.disablePositionalTracking = false;
+        //Messenger<float>.Broadcast(GameEvent.CLOSE_UML_PANEL, true);
+        //UnityEngine.Cursor.visible = false;
+    }
+
+    public void UMLButton()
+    {
+        if (_hudGUIMode)
+        {
+            CloseUMLView();
+        }
+        _hudGUIMode = !_hudGUIMode;
+        if (_hudGUIMode)
+        {
+            OpenUMLView();
+            // Fix the mouse for GUI operatons
+            //mousePlayer.freezeCamera = true;
+            //mouseCamera.freezeCamera = true;
+            //rayHandler.freezeCamera = true;
+            // Adjust the mouse mode
+            //UnityEngine.Cursor.lockState = CursorLockMode.None;
+
+            //TrackedPoseDriver trackedPose = _assignedCamera.GetComponent<TrackedPoseDriver>();
+            //trackedPose.
+            //InputTracking.disablePositionalTracking = true;
+            //_umlPanel.Open();
+            //UnityEngine.Cursor.visible = true;
+
+            //_button = _documentUI.rootVisualElement.Q("SettingsButton") as Button;
+            //_button.RegisterCallback<ClickEvent>(LaunchSettings);
+
+            //Button _closebutton = _documentUI.rootVisualElement.Q("CloseButton") as Button;
+            //_closebutton.RegisterCallback<ClickEvent>(CloseSettings);
+        }
+    }
+
+    public void CloseUMLView()
+    {
+        GameObject cPanel = GameObject.Find("CenterPanel");
+        CanvasGroup canvasGroup = cPanel.GetComponent<CanvasGroup>();
+
+        canvasGroup.alpha = 0;
+        canvasGroup.interactable = false;
+        Debug.Log("This is the close window");
+        TrackedPoseDriver trackedPose = _assignedCamera.GetComponent<TrackedPoseDriver>();
+        //InputTracking.disablePositionalTracking = false;
+        //Messenger<float>.Broadcast(GameEvent.CLOSE_UML_PANEL, true);
+        //UnityEngine.Cursor.visible = false;
+    }
+
+    public void OpenUMLView()
+    {
+        GameObject cPanel = GameObject.Find("CenterPanel");
+        CanvasGroup canvasGroup = cPanel.GetComponent<CanvasGroup>();
+
+        canvasGroup.alpha = 1;
+        canvasGroup.interactable = true;
+        Debug.Log("This is the open window");
+        TrackedPoseDriver trackedPose = _assignedCamera.GetComponent<TrackedPoseDriver>();
+        //InputTracking.disablePositionalTracking = false;
         //Messenger<float>.Broadcast(GameEvent.CLOSE_UML_PANEL, true);
         //UnityEngine.Cursor.visible = false;
     }

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UIElements;
 using Google.XR.Cardboard;
-using UnityEngine.SpatialTracking;
+using UnityEngine.InputSystem.XR;
 using UnityEngine.XR;
 
 public class UIController : MonoBehaviour
@@ -14,6 +14,8 @@ public class UIController : MonoBehaviour
 
     [SerializeField] UMLPanel _umlPanel;
 
+    [SerializeField] List<GameObject> _umlObjs;
+
     private Button _button;
 
     private bool _hudGUIMode;
@@ -21,6 +23,8 @@ public class UIController : MonoBehaviour
     private Label _scoreTextField;
     private string _scoreTextString;
     private Vector2 _speedVector;
+
+    private PlayerController _playerController;
 
 
     // Listeners attached during enable or disable
@@ -30,6 +34,8 @@ public class UIController : MonoBehaviour
         Messenger.AddListener(GameEvent.CLOSE_UML_PANEL, CloseUMLView);
         Messenger.AddListener(GameEvent.OPEN_UML_PANEL, OpenUMLView);
         Messenger.AddListener(GameEvent.UML_PANEL_BUTTON, UMLButton);
+        Messenger.AddListener(GameEvent.UML_ACTIVE, UMLActive);
+        Messenger.AddListener(GameEvent.UML_INACTIVE, UMLInActive);
     }
 
     private void OnDisable()
@@ -38,6 +44,8 @@ public class UIController : MonoBehaviour
         Messenger.RemoveListener(GameEvent.CLOSE_UML_PANEL, CloseUMLView);
         Messenger.RemoveListener(GameEvent.OPEN_UML_PANEL, OpenUMLView);
         Messenger.RemoveListener(GameEvent.UML_PANEL_BUTTON, UMLButton);
+        Messenger.RemoveListener(GameEvent.UML_ACTIVE, UMLActive);
+        Messenger.RemoveListener(GameEvent.UML_INACTIVE, UMLInActive);
     }
 
     // Start is called before the first frame update
@@ -45,28 +53,6 @@ public class UIController : MonoBehaviour
     {
         _score = 0;
         _hudGUIMode = false;
-        //_umlPanel = new UMLPanel();
-
-        //_documentUI = GetComponent<UIDocument>();
-        //VisualElement _window = _documentUI.rootVisualElement.Q("ViewScreen") as VisualElement;
-        //_window.visible = false;
-
-        //Button _closeButton = _documentUI.rootVisualElement.Q("CloseButton") as Button;
-        //_closeButton.visible = false;
-
-
-        //_scoreTextField = _documentUI.rootVisualElement.Q("Score") as Label;
-
-
-        //TextField _setnameField = _documentUI.rootVisualElement.Q("PlayerName") as TextField;
-        //_scoreTextString = $"{_setnameField.text}'s Score: ";
-
-        //_scoreTextField.text = _scoreTextString + _score.ToString();
-
-        //_umlPanel.Close();
-
-        //UnityEngine.Cursor.lockState = CursorLockMode.Locked;
-        //UnityEngine.Cursor.visible = false;
     }
 
     // Update is called once per frame
@@ -78,12 +64,8 @@ public class UIController : MonoBehaviour
         }
         else
         {
-            // Get the component objects
-            //MouseLook mousePlayer = _assignedPlayer.GetComponent<MouseLook>();
-            //MouseLook mouseCamera = _assignedCamera.GetComponent<MouseLook>();
-            //RayShooter rayHandler = _assignedCamera.GetComponent<RayShooter>();
-            if (Api.IsTriggerHeldPressed) Debug.Log("button pressed and held");
-            if (Api.IsTriggerPressed) Debug.Log("simple button press");
+            //if (Api.IsTriggerHeldPressed) Debug.Log("button pressed and held");
+            //if (Api.IsTriggerPressed) Debug.Log("simple button press");
             // Check for GUI escape press
             if (Input.GetKeyDown(KeyCode.Escape) || Api.IsTriggerHeldPressed)
             {
@@ -96,31 +78,11 @@ public class UIController : MonoBehaviour
             }
             if (_hudGUIMode)
             {
-                // Fix the mouse for GUI operatons
-                //mousePlayer.freezeCamera = true;
-                //mouseCamera.freezeCamera = true;
-                //rayHandler.freezeCamera = true;
-                // Adjust the mouse mode
-                //UnityEngine.Cursor.lockState = CursorLockMode.None;
-
-                TrackedPoseDriver trackedPose = _assignedCamera.GetComponent<TrackedPoseDriver>();
-                //trackedPose.
-                //InputTracking.disablePositionalTracking = true;
-                _umlPanel.Open();
-                //UnityEngine.Cursor.visible = true;
-
-                //_button = _documentUI.rootVisualElement.Q("SettingsButton") as Button;
-                //_button.RegisterCallback<ClickEvent>(LaunchSettings);
-
-                //Button _closebutton = _documentUI.rootVisualElement.Q("CloseButton") as Button;
-                //_closebutton.RegisterCallback<ClickEvent>(CloseSettings);
+                UMLActive();
             }
             else
             {
-                // Go ahead and let the rest of the mouse operations take over
-                //mousePlayer.freezeCamera = false;
-                //mouseCamera.freezeCamera = false;
-                //rayHandler.freezeCamera = false;
+                UMLInActive();
             }
             #if !UNITY_EDITOR
                 Api.UpdateScreenParams();
@@ -173,13 +135,13 @@ public class UIController : MonoBehaviour
         //_closeButton.visible = false;
         //UnityEngine.Cursor.lockState = CursorLockMode.Locked;
 
-        GameObject cPanel = GameObject.Find("CenterPanel");
-        CanvasGroup canvasGroup = cPanel.GetComponent<CanvasGroup>();
+        //GameObject cPanel = GameObject.Find("CenterPanel");
+        //CanvasGroup canvasGroup = cPanel.GetComponent<CanvasGroup>();
 
-        canvasGroup.alpha = 0;
-        canvasGroup.interactable = false;
-        Debug.Log("This is the close button");
-        TrackedPoseDriver trackedPose = _assignedCamera.GetComponent<TrackedPoseDriver>();
+        //canvasGroup.alpha = 0;
+        //canvasGroup.interactable = false;
+        //Debug.Log("This is the close button");
+        //TrackedPoseDriver trackedPose = _assignedCamera.GetComponent<TrackedPoseDriver>();
         //InputTracking.disablePositionalTracking = false;
         //Messenger<float>.Broadcast(GameEvent.CLOSE_UML_PANEL, true);
         //UnityEngine.Cursor.visible = false;
@@ -195,24 +157,6 @@ public class UIController : MonoBehaviour
         if (_hudGUIMode)
         {
             OpenUMLView();
-            // Fix the mouse for GUI operatons
-            //mousePlayer.freezeCamera = true;
-            //mouseCamera.freezeCamera = true;
-            //rayHandler.freezeCamera = true;
-            // Adjust the mouse mode
-            //UnityEngine.Cursor.lockState = CursorLockMode.None;
-
-            //TrackedPoseDriver trackedPose = _assignedCamera.GetComponent<TrackedPoseDriver>();
-            //trackedPose.
-            //InputTracking.disablePositionalTracking = true;
-            //_umlPanel.Open();
-            //UnityEngine.Cursor.visible = true;
-
-            //_button = _documentUI.rootVisualElement.Q("SettingsButton") as Button;
-            //_button.RegisterCallback<ClickEvent>(LaunchSettings);
-
-            //Button _closebutton = _documentUI.rootVisualElement.Q("CloseButton") as Button;
-            //_closebutton.RegisterCallback<ClickEvent>(CloseSettings);
         }
     }
 
@@ -248,6 +192,63 @@ public class UIController : MonoBehaviour
     {
         _score += 1;
         _scoreTextField.text = _scoreTextString + _score.ToString();
+    }
+
+    public void UMLActive()
+    {
+        //// Ugly hack to find the Tracked Pose Driver since it is not attached
+        //// as a proper component (GetComponent does not work)
+        //Component[] components = _assignedCamera.GetComponents(typeof(MonoBehaviour));
+        //Debug.Log(components);
+        //foreach (Component item in components)
+        //{
+        //    // Update tracking to position only
+        //    if (item.ToString().Contains("TrackedPoseDriver"))
+        //    {
+        //        TrackedPoseDriver trackedPose = item as TrackedPoseDriver;
+        //        trackedPose.trackingType = TrackedPoseDriver.TrackingType.PositionOnly;
+        //        Debug.Log("Tracking Type changed to position only");
+        //    }
+        //}
+
+        Debug.Log("Inside UML Active function");
+
+        PlayerController pc = _assignedPlayer.GetComponent<PlayerController>();
+        _playerController = pc;
+        Destroy(pc);
+
+    }
+
+    public void UMLInActive()
+    {
+        //// Ugly hack to find the Tracked Pose Driver since it is not attached
+        //// as a proper component (GetComponent does not work)
+        //Component[] components = _assignedCamera.GetComponents(typeof(MonoBehaviour));
+        //Debug.Log(components);
+        //foreach (Component item in components)
+        //{
+        //    Debug.Log($"Component Name: {item.ToString()}");
+        //    // Update tracking to position and rotation
+        //    if (item.ToString().Contains("TrackedPoseDriver"))
+        //    {
+        //        TrackedPoseDriver trackedPose = item as TrackedPoseDriver;
+        //        trackedPose.trackingType = TrackedPoseDriver.TrackingType.RotationAndPosition;
+        //        Debug.Log("Tracking Type changed to normal");
+        //    }
+        //}
+
+        Debug.Log("Inside UML InActive function");
+
+        PlayerController pc = _assignedPlayer.GetComponent<PlayerController>();
+        if (pc == null)
+        {
+            _assignedPlayer.gameObject.AddComponent<PlayerController>();
+            pc = _playerController;
+        }
+
+        
+        //PlayerController pc = _assignedPlayer.GetComponent<PlayerController>();
+        
     }
 
     private void OnSpeedChange(float speed)

@@ -25,6 +25,10 @@ using UnityEngine;
 public class CardboardStartup : MonoBehaviour
 {
     private int _buttonCounter;
+    private bool _buttonReady;
+    private int _frameCounter;
+    private bool _umlActive;
+
     /// <summary>
     /// Start is called before the first frame update.
     /// </summary>
@@ -44,6 +48,9 @@ public class CardboardStartup : MonoBehaviour
         // Set the button held timer to a lower setting
         Api.MinTriggerHeldPressedTime = 1.0;
         _buttonCounter = 0;
+        _frameCounter = 0;
+        _buttonReady = true;
+        _umlActive = false;
     }
 
     /// <summary>
@@ -51,6 +58,9 @@ public class CardboardStartup : MonoBehaviour
     /// </summary>
     public void Update()
     {
+        // Update frame counter
+        _frameCounter++;
+
         if (Api.IsGearButtonPressed)
         {
             Api.ScanDeviceParams();
@@ -65,19 +75,47 @@ public class CardboardStartup : MonoBehaviour
         {
             Debug.Log("button pressed and held");
             Debug.Log($"This is the hold time: {Api.MinTriggerHeldPressedTime}");
-            //Api.MinTriggerHeldPressedTime = 0.25;
-            //Messenger.Broadcast(GameEvent.UML_PANEL_BUTTON);
+            //Api.MinTriggerHeldPressedTime = 1.0;
+            if (_umlActive)
+            {
+                Messenger.Broadcast(GameEvent.UML_INACTIVE);
+                //_umlActive = !_umlActive;
+            }
+            else
+            {
+                Messenger.Broadcast(GameEvent.UML_ACTIVE);
+                //_umlActive = !_umlActive;
+            }
+            _umlActive = !_umlActive;
             Api.Recenter();
         }
         if (Api.IsTriggerPressed)
         {
-            if (_buttonCounter > 10)
+            _buttonCounter++;
+            if (_buttonCounter >= 1)
             {
+                Debug.Log($"button presses over 1: {_buttonCounter}");
+                if (_frameCounter > 5)
+                {
+                    Debug.Log($"frame counter over 5: {_frameCounter}");
+                    _frameCounter = 0;
+                    _buttonReady = true;
+                }
+                else
+                {
+                    _buttonReady = false;
+                }
+            }
+            if (_buttonReady)
+            {
+                Debug.Log($"button message state: {_buttonReady}");
+                _buttonReady = false;
                 _buttonCounter = 0;
                 Messenger.Broadcast(GameEvent.UML_PANEL_BUTTON);
             }
-            _buttonCounter++;
             Debug.Log("simple button press");
+            Debug.Log($"button counter: {_buttonCounter}");
+            Debug.Log($"frame counter: {_frameCounter}");
             //Api.Recenter();
         }
         if (Api.HasNewDeviceParams())

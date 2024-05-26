@@ -88,6 +88,15 @@ public class VrModeController : MonoBehaviour
     }
 
     /// <summary>
+    /// Start is called before the first frame update.
+    /// </summary>
+    public void Stop()
+    {
+        // Call the private method to stop XR
+        StopXR();
+    }
+
+    /// <summary>
     /// Update is called once per frame.
     /// </summary>
     public void Update()

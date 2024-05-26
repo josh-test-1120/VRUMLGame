@@ -10,6 +10,8 @@ public class GameEvent : MonoBehaviour
     public const string CLOSE_UML_PANEL = "CLOSE_UML_PANEL";
     public const string OPEN_UML_PANEL = "OPEN_UML_PANEL";
     public const string UML_PANEL_BUTTON = "UML_PANEL_BUTTON";
+    public const string UML_ACTIVE = "UML_ACTIVE";
+    public const string UML_INACTIVE = "UML_INACTIVE";
 
     // Start is called before the first frame update
     void Start()

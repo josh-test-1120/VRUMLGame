@@ -78,16 +78,16 @@ public class CardboardStartup : MonoBehaviour
             //Api.MinTriggerHeldPressedTime = 1.0;
             if (_umlActive)
             {
-                Messenger.Broadcast(GameEvent.UML_INACTIVE);
+                Messenger.Broadcast(GameEvent.FREEZE_MOVEMENT);
                 //_umlActive = !_umlActive;
             }
             else
             {
-                Messenger.Broadcast(GameEvent.UML_ACTIVE);
+                Messenger.Broadcast(GameEvent.FREEZE_MOVEMENT);
                 //_umlActive = !_umlActive;
             }
             _umlActive = !_umlActive;
-            Api.Recenter();
+            //Api.Recenter();
         }
         if (Api.IsTriggerPressed)
         {

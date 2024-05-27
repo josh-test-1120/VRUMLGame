@@ -13,6 +13,8 @@ public class GameEvent : MonoBehaviour
     public const string UML_ACTIVE = "UML_ACTIVE";
     public const string UML_INACTIVE = "UML_INACTIVE";
 
+    public const string FREEZE_MOVEMENT = "FREEZE_MOVEMENT";
+
     // Start is called before the first frame update
     void Start()
     {

@@ -848,7 +848,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4337286722218303929}
   m_Layer: 0
-  m_Name: UML1-ScaledDown-Final
+  m_Name: UML1-ScaledDown-Old
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

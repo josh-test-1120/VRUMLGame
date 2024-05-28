@@ -9,6 +9,10 @@ public class LeftSelection : MonoBehaviour
     [SerializeField]
     TextMeshProUGUI textMesh;
 
+    [Header("Parent Button Handler")]
+    [SerializeField]
+    OnOffButtonEvents uiButton;
+
     private CanvasGroup _canvasGroup;
 
     // Start is called before the first frame update
@@ -42,19 +46,16 @@ public class LeftSelection : MonoBehaviour
         _canvasGroup.alpha = 1;
         //_canvasGroup.blocksRaycasts = false;
 
-        int LayerUI = LayerMask.NameToLayer("UI");
-        gameObject.layer = LayerUI;
 
         StartCoroutine(FlashTextCoroutine());
-
-
-        //_canvasGroup.interactable = true;
     }
 
     // Update is called once per frame
     void Close()
     {
         _canvasGroup.alpha = 0;
+
+        uiButton.SendMessage("SelectionPanelClose");
         //_canvasGroup.blocksRaycasts = true;
         //_canvasGroup.interactable = true;
     }
@@ -69,13 +70,15 @@ public class LeftSelection : MonoBehaviour
         textMesh.text = "Correct Answer!";
         //textMesh.SetText("Correct Answer!");
 
-        Debug.Log($"Text Mesh Pro object after set: {textMesh.ToString()}");
+        Debug.Log($"Text Mesh Pro object after set: {textMesh.text.ToString()}");
 
         //yield on a new YieldInstruction that waits for 5 seconds.
-        yield return new WaitForSeconds(5);
+        yield return new WaitForSecondsRealtime(5);
 
 
         //After we have waited 5 seconds print the time again.
         Debug.Log("Finished Coroutine at timestamp : " + Time.time);
+        // Close out the windows
+        Close();
     }
 }

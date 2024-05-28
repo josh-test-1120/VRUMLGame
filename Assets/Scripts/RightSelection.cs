@@ -9,6 +9,10 @@ public class RightSelection : MonoBehaviour
     [SerializeField]
     TextMeshProUGUI textMesh;
 
+    [Header("Parent Button Handler")]
+    [SerializeField]
+    OnOffButtonEvents uiButton;
+
     private CanvasGroup _canvasGroup;
 
     // Start is called before the first frame update
@@ -27,9 +31,7 @@ public class RightSelection : MonoBehaviour
     {
         Debug.Log("Button on Pointer Click");
         Debug.Log($"Text Mesh Pro object: {textMesh.ToString()}");
-        Debug.Log($"Text Mesh Pro text object: {textMesh.text}");
         
-
         Open();
 
     }
@@ -39,20 +41,18 @@ public class RightSelection : MonoBehaviour
     }
 
     // Start is called before the first frame update
-    void Open()
+    public void Open()
     {
         _canvasGroup.alpha = 1;
 
         StartCoroutine(FlashTextCoroutine());
-
-
-        //_canvasGroup.interactable = true;
     }
 
     // Update is called once per frame
-    void Close()
+    public void Close()
     {
         _canvasGroup.alpha = 0;
+        uiButton.SendMessage("SelectionPanelClose");
         //_canvasGroup.interactable = true;
     }
 
@@ -63,14 +63,18 @@ public class RightSelection : MonoBehaviour
         Debug.Log($"Text Mesh Pro object in Coroutine: {textMesh.ToString()}");
         Debug.Log($"Text Mesh Pro text in Coroutine: {textMesh.text.ToString()}");
 
-        textMesh.text = "Correct Answer!";
+        textMesh.text = "Wrong Answer!";
         //textMesh.SetText("Wrong Answer!");
 
+        Debug.Log($"Text Mesh Pro object after set: {textMesh.text.ToString()}");
+
         //yield on a new YieldInstruction that waits for 5 seconds.
-        yield return new WaitForSeconds(5);
+        yield return new WaitForSecondsRealtime(5);
 
 
         //After we have waited 5 seconds print the time again.
         Debug.Log("Finished Coroutine at timestamp : " + Time.time);
+        // Close out the windows
+        Close();
     }
 }

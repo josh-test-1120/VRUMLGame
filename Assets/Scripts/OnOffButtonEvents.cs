@@ -9,6 +9,9 @@ public class OnOffButtonEvents : MonoBehaviour
     [Header("UML Assets")]
     [SerializeField] List<GameObject> _umlObjs;
 
+    [Header("Answer Panel")]
+    [SerializeField] CanvasGroup _selectionPanel;
+
     private GameObject _uml;
     private bool _isOn = false;
 
@@ -35,7 +38,22 @@ public class OnOffButtonEvents : MonoBehaviour
             _uml.transform.position = pos;
             //float angle = Random.Range(0, 360);
             //enemy.transform.Rotate(0, angle, 0);
+
+            _selectionPanel.alpha = 1;
+
+            Debug.Log("Entering the show selection panel");
+            SelectionPanelShow();
+
         }
+        else
+        {
+            Debug.Log("Destroy the UML object");
+            Destroy(_uml);
+            _selectionPanel.alpha = 0;
+        }
+
+        _isOn = !_isOn;
+
     }
     public void OnPointerExit()
     {
@@ -43,4 +61,22 @@ public class OnOffButtonEvents : MonoBehaviour
         Destroy(_uml);
     }
 
+    public void SelectionPanelShow()
+    {
+        Debug.Log("Inside the show selection panel");
+        // Setup the selection screen
+        int LayerInteractive = LayerMask.NameToLayer("Interactive");
+
+        GameObject[] childobjs = _selectionPanel.GetComponentsInChildren<GameObject>();
+
+        foreach (GameObject item in childobjs)
+        {
+            item.layer = LayerInteractive;
+        }
+        Debug.Log("Leaving the show selection panel");
+
+        //// Setup the selection screen
+        //int LayerInteractive = LayerMask.NameToLayer("Interactive");
+        //_selectionPanel.gameObject.layer = LayerInteractive;
+    }
 }

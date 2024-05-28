@@ -111,7 +111,7 @@ public class CardboardStartup : MonoBehaviour
                 Debug.Log($"button message state: {_buttonReady}");
                 _buttonReady = false;
                 _buttonCounter = 0;
-                Messenger.Broadcast(GameEvent.UML_PANEL_BUTTON);
+                //Messenger.Broadcast(GameEvent.UML_PANEL_BUTTON);
             }
             Debug.Log("simple button press");
             Debug.Log($"button counter: {_buttonCounter}");

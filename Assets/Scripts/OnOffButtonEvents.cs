@@ -7,10 +7,16 @@ public class OnOffButtonEvents : ReticleButtonClamp
 {
     // UML panels to diplay from
     [Header("UML Assets")]
-    [SerializeField] List<GameObject> _umlObjs;
+    [SerializeField] List<GameObject> umlObjs;
 
     [Header("Answer Panel")]
-    [SerializeField] CanvasGroup _selectionPanel;
+    [SerializeField] CanvasGroup selectionPanel;
+
+    [Header("Anchor Point")]
+    [SerializeField] GameObject anchorPoint;
+
+    [Header("Diagram Box")]
+    [SerializeField] GameObject boxParent;
 
     private GameObject _uml;
     private bool _isOn = false;
@@ -26,40 +32,19 @@ public class OnOffButtonEvents : ReticleButtonClamp
 
         bool clamped = ReticleNormalize();
 
-        Debug.Log($"This is the On/Off button state: {clamped}");
+        Debug.Log($"This is the On/Off button readiness: {clamped}");
         if (clamped)
         {
             if (!_isOn)
             {
-                int index = Random.Range(0, _umlObjs.Count);
-                Debug.Log($"This is the random index: {index}");
-                Debug.Log($"This is the UML Object Count: {_umlObjs.Count}");
-                _uml = Instantiate(_umlObjs[index]) as GameObject;
-
-                Vector3 pos = this.transform.position;
-                pos.z += 5;
-                pos.y = 0;
-
-                _uml.transform.position = pos;
-                //float angle = Random.Range(0, 360);
-                //enemy.transform.Rotate(0, angle, 0);
-
-                _selectionPanel.alpha = 1;
-
-                Debug.Log("Entering the show selection panel");
+                
                 SelectionPanelShow();
 
             }
             else
             {
-                Debug.Log("Destroy the UML object");
-                Destroy(_uml);
-                _selectionPanel.alpha = 0;
-
+                //Debug.Log("Destroy the UML object");
                 SelectionPanelClose();
-
-                //int LayerUI = LayerMask.NameToLayer("UI");
-                //gameObject.layer = LayerUI;
             }
 
             _isOn = !_isOn;
@@ -74,39 +59,51 @@ public class OnOffButtonEvents : ReticleButtonClamp
 
     public void SelectionPanelShow()
     {
-        //Debug.Log("Inside the show selection panel");
+        Debug.Log("Entering the show selection panel");
+        // Instantiate a random UML diagram from list
+        int index = Random.Range(0, umlObjs.Count);
+        Debug.Log($"This is the random index: {index}");
+        Debug.Log($"This is the UML Object Count: {umlObjs.Count}");
+        _uml = Instantiate(umlObjs[index]) as GameObject;
+        // Translate and rotate based on parent
+        _uml.transform.parent = boxParent.transform;
+        _uml.transform.rotation = boxParent.transform.rotation;
+
+        _uml.transform.localPosition = Vector3.forward * 5;
+
+        //Vector3 pos = _uml.transform.position;
+        //pos.z += 5;
+
+        //_uml.transform.position = pos;
+
+        //Vector3 pos = new Vector3();
+        //pos.y = 0;
+        //pos.z = 5;
+
+        // Update the visibility of the panel
+        selectionPanel.alpha = 1;
         // Setup the selection screen
         int LayerInteractive = LayerMask.NameToLayer("Interactive");
+        // Update the child objects with the proper interactive layer
+        CanvasRenderer[] childobjs = selectionPanel.GetComponentsInChildren<CanvasRenderer>();
 
-        CanvasRenderer[] childobjs = _selectionPanel.GetComponentsInChildren<CanvasRenderer>();
-
-        //Debug.Log($"This is the size of the child objects: {childobjs.Length}");
-
-        foreach (CanvasRenderer item in childobjs)
-        {
-            item.gameObject.layer = LayerInteractive;
-            //Debug.Log($"This is the layer: {item.gameObject.layer} for item: {item}");
-        }
-        //Debug.Log("Leaving the show selection panel");
+        foreach (CanvasRenderer item in childobjs) item.gameObject.layer = LayerInteractive;
 
     }
 
     public void SelectionPanelClose()
     {
         Debug.Log("Inside the close selection panel");
+        // Destroy the UML asset
+        Destroy(_uml);
+        // Update the visibility of the panel
+        selectionPanel.alpha = 0;
         // Setup the selection screen
         int LayerUI = LayerMask.NameToLayer("UI");
 
-        CanvasRenderer[] childobjs = _selectionPanel.GetComponentsInChildren<CanvasRenderer>();
+        // Update the child objects with the proper UI layer (non interactive)
+        CanvasRenderer[] childobjs = selectionPanel.GetComponentsInChildren<CanvasRenderer>();
 
-        //Debug.Log($"This is the size of the child objects: {childobjs.Length}");
-
-        foreach (CanvasRenderer item in childobjs)
-        {
-            item.gameObject.layer = LayerUI;
-            //Debug.Log($"This is the layer: {item.gameObject.layer} for item: {item}");
-        }
-        Debug.Log("Leaving the close selection panel");
-
+        foreach (CanvasRenderer item in childobjs) item.gameObject.layer = LayerUI;
     }
 }

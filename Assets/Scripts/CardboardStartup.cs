@@ -75,10 +75,12 @@ public class CardboardStartup : MonoBehaviour
         {
             Debug.Log("button pressed and held");
             Debug.Log($"This is the hold time: {Api.MinTriggerHeldPressedTime}");
+            Messenger.Broadcast(GameEvent.MOVEMENT_NOTIFY);
             //Api.MinTriggerHeldPressedTime = 1.0;
             if (_umlActive)
             {
                 Messenger.Broadcast(GameEvent.FREEZE_MOVEMENT);
+                
                 //_umlActive = !_umlActive;
             }
             else

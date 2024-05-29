@@ -20,8 +20,11 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Starter.unity
     guid: 682979892363aa34e9e334342df876d1
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/UMLSandbox-VR-UI.unity
     guid: a367c80d8b7ae4ffc82e99da59776146
+  - enabled: 1
+    path: Assets/Scenes/UMLDraftScene-XR-UI.unity
+    guid: 69b5b6b48705a4f698758b7cc130d297
   m_configObjects:
     com.unity.xr.management.loader_settings: {fileID: 11400000, guid: b774a913555ba4a0a9f7eea43ecdd245, type: 2}

@@ -12,6 +12,7 @@ public class GameEvent : MonoBehaviour
     public const string UML_PANEL_BUTTON = "UML_PANEL_BUTTON";
     public const string UML_ACTIVE = "UML_ACTIVE";
     public const string UML_INACTIVE = "UML_INACTIVE";
+    public const string MOVEMENT_NOTIFY = "MOVEMENT_NOTIFY";
 
     public const string FREEZE_MOVEMENT = "FREEZE_MOVEMENT";
 

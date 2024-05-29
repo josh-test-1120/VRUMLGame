@@ -33,6 +33,24 @@ public class ReticleButtonClamp : MonoBehaviour
         //_buttonReady = true;
         //_buttonSuppress = false;
         _timeDelta += Time.deltaTime;
+
+        //// Calculate delta
+        //if (_firstPress != 0.0f && _lastPress != 0.0f)
+        //{
+        //    float timeDelay = _lastPress - _firstPress;
+
+        //    if (timeDelay > 3.0f)
+        //    {
+        //        Debug.Log($"time counter over 3: {_timeDelta}");
+        //        //_timeDelta = 0.0f;
+        //        _buttonCounter = 0;
+        //        _buttonReady = true;
+        //        _buttonSuppress = false;
+        //        _firstPress = _timeDelta;
+        //        _lastPress = 0.0f;
+        //    }
+        //}
+
     }
 
     protected bool ReticleNormalize()
@@ -56,14 +74,25 @@ public class ReticleButtonClamp : MonoBehaviour
             if (_firstPress != 0.0f && _lastPress != 0.0f)
             {
                 float timeDelay = _lastPress - _firstPress;
-                if (timeDelay > 3.0f)
+                if (timeDelay >= 10.0f)
                 {
-                    Debug.Log($"time counter over 3: {_timeDelta}");
-                    _timeDelta = 0.0f;
+                    Debug.Log("State Reset of button readiness");
+                    //_timeDelta = 0.0f;
                     _buttonCounter = 0;
                     _buttonReady = true;
                     _buttonSuppress = false;
                     _firstPress = 0.0f;
+                    _lastPress = 0.0f;
+                }
+                
+                if (timeDelay > 3.0f && timeDelay < 10.0f)
+                {
+                    Debug.Log($"time counter over 3: {_timeDelta}");
+                    //_timeDelta = 0.0f;
+                    _buttonCounter = 0;
+                    _buttonReady = true;
+                    _buttonSuppress = false;
+                    _firstPress = _timeDelta;
                     _lastPress = 0.0f;
                 }
                 else
@@ -86,4 +115,3 @@ public class ReticleButtonClamp : MonoBehaviour
         return _buttonReady;
     }
 }
-

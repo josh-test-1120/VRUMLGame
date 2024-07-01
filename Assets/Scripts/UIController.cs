@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UIElements;
-using Google.XR.Cardboard;
+//using Google.XR.Cardboard;
 using UnityEngine.InputSystem.XR;
 using UnityEngine.XR;
 
@@ -67,7 +67,7 @@ public class UIController : MonoBehaviour
             //if (Api.IsTriggerHeldPressed) Debug.Log("button pressed and held");
             //if (Api.IsTriggerPressed) Debug.Log("simple button press");
             // Check for GUI escape press
-            if (Input.GetKeyDown(KeyCode.Escape) || Api.IsTriggerHeldPressed)
+            if (Input.GetKeyDown(KeyCode.Escape))
             {
                 Debug.Log("button pressed and held");
                 if (_hudGUIMode)
@@ -84,9 +84,6 @@ public class UIController : MonoBehaviour
             {
                 UMLInActive();
             }
-            #if !UNITY_EDITOR
-                Api.UpdateScreenParams();
-            #endif
         }
     }
 

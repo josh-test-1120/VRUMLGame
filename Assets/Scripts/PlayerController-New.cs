@@ -1,7 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using Google.XR.Cardboard;
+//using Google.XR.Cardboard;
 
 public class PlayerControllerNew : MonoBehaviour
 {
@@ -42,20 +42,20 @@ public class PlayerControllerNew : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Api.IsTriggerPressed)
-        {
-            Debug.Log("Button Pressed");
+        //if (Api.IsTriggerPressed)
+        //{
+        //    Debug.Log("Button Pressed");
             
-        }
-        if (Api.IsTriggerHeldPressed)
-        {
-            Debug.Log("Button Pressed and held");
-            Debug.Log("Swapping to movement mode...");
-            // Create a Vector3 and apply a conversion for movement delta
-            Vector3 forward = vrPlayer.TransformDirection(Vector3.forward);
-            // Tell the Character Controller for the Player GameObject to move
-            charControl.SimpleMove(forward * speed);
-        }
+        //}
+        //if (Api.IsTriggerHeldPressed)
+        //{
+        //    Debug.Log("Button Pressed and held");
+        //    Debug.Log("Swapping to movement mode...");
+        //    // Create a Vector3 and apply a conversion for movement delta
+        //    Vector3 forward = vrPlayer.TransformDirection(Vector3.forward);
+        //    // Tell the Character Controller for the Player GameObject to move
+        //    charControl.SimpleMove(forward * speed);
+        //}
         //// Boolean check for angle that would make you horizontal
         //bool notHorizontal = vrPlayer.eulerAngles.x < 90.0f;
         //// Initialize variables

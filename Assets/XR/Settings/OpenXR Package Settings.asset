@@ -560,7 +560,7 @@ MonoBehaviour:
     manifestName: cambria
     enabled: 1
   forceRemoveInternetPermission: 0
-  symmetricProjection: 0
+  symmetricProjection: 1
   systemSplashScreen: {fileID: 0}
   optimizeBufferDiscards: 1
   lateLatchingMode: 0
@@ -658,7 +658,7 @@ MonoBehaviour:
   m_renderMode: 1
   m_depthSubmissionMode: 0
   m_optimizeBufferDiscards: 1
-  m_symmetricProjection: 0
+  m_symmetricProjection: 1
 --- !u!114 &3176586910367912575
 MonoBehaviour:
   m_ObjectHideFlags: 0

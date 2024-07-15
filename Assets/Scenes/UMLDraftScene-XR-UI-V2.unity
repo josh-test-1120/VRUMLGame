@@ -20,8 +20,8 @@ RenderSettings:
   m_FogDensity: 0.01
   m_LinearFogStart: 50
   m_LinearFogEnd: 600
-  m_AmbientSkyColor: {r: 0.8814331, g: 0.9229505, b: 0.94799644, a: 1}
-  m_AmbientEquatorColor: {r: 0.8814331, g: 0.9229505, b: 0.94799644, a: 1}
+  m_AmbientSkyColor: {r: 0.610799, g: 0.8176254, b: 0.9184164, a: 1}
+  m_AmbientEquatorColor: {r: 0.610799, g: 0.8176254, b: 0.9184164, a: 1}
   m_AmbientGroundColor: {r: 0.047, g: 0.043, b: 0.035, a: 1}
   m_AmbientIntensity: 1
   m_AmbientMode: 1
@@ -7349,7 +7349,7 @@ MonoBehaviour:
   m_VolumeTrigger: {fileID: 0}
   m_VolumeFrameworkUpdateModeOption: 2
   m_RenderPostProcessing: 1
-  m_Antialiasing: 3
+  m_Antialiasing: 0
   m_AntialiasingQuality: 2
   m_StopNaN: 0
   m_Dithering: 0

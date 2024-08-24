@@ -66,14 +66,14 @@ public class ControllerInteractions : MonoBehaviour
         {
             Debug.Log($"Item string: {item.ToString()}");
         }
-        UnityEngine.XR.InputDevices.GetDevices(inputDevices);
+        InputDevices.GetDevices(inputDevices);
         foreach (var item in inputDevices)
         {
             Debug.Log($"Device found with name '{item.name}' and role '{item.role.ToString()}'");
         }
         var device = new UnityEngine.XR.InputDevice();
         var devices = new List<UnityEngine.XR.InputDevice>();
-        UnityEngine.XR.InputDevices.GetDevicesAtXRNode(XRNode.LeftHand,
+        InputDevices.GetDevicesAtXRNode(XRNode.LeftHand,
             devices);
         if (devices.Count == 1)
         {

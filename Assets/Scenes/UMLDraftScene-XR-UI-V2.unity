@@ -263,6 +263,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: UML-UI-Mountains
       objectReference: {fileID: 0}
+    - target: {fileID: 1062200476821970489, guid: e15ab586e92dc4348b58562620c89ac0, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1953903051967908911, guid: e15ab586e92dc4348b58562620c89ac0, type: 3}
       propertyPath: m_Camera
       value: 
@@ -5281,8 +5285,12 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2478627170162918088, guid: 0475c4bba2eda46c097d19d383e9d0db, type: 3}
+      propertyPath: m_RenderShadows
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2478627170162918088, guid: 0475c4bba2eda46c097d19d383e9d0db, type: 3}
       propertyPath: m_RenderPostProcessing
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4615373282549587596, guid: 0475c4bba2eda46c097d19d383e9d0db, type: 3}
       propertyPath: m_Name
@@ -5436,6 +5444,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: UML-UI-Lava
       objectReference: {fileID: 0}
+    - target: {fileID: 7177411300846139777, guid: 85bbf52a3aff5497d9ced3c357c9f4a9, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8519491362334108567, guid: 85bbf52a3aff5497d9ced3c357c9f4a9, type: 3}
       propertyPath: m_Camera
       value: 
@@ -5465,6 +5477,10 @@ PrefabInstance:
     - target: {fileID: 1813229330449531780, guid: 4c32f3d13343c4f0fba989124d86a89b, type: 3}
       propertyPath: m_Name
       value: UML-UI-Hills
+      objectReference: {fileID: 0}
+    - target: {fileID: 1813229330449531780, guid: 4c32f3d13343c4f0fba989124d86a89b, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2779601861261377538, guid: 4c32f3d13343c4f0fba989124d86a89b, type: 3}
       propertyPath: m_Pivot.x
@@ -5550,6 +5566,10 @@ PrefabInstance:
       propertyPath: boxParent
       value: 
       objectReference: {fileID: 977974992}
+    - target: {fileID: 9029614120527154561, guid: 4c32f3d13343c4f0fba989124d86a89b, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -5771,6 +5791,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: NotifyUI
       objectReference: {fileID: 0}
+    - target: {fileID: 5300322013252320944, guid: d11fe48ce3b934cc48b356f604743140, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6475916596901844384, guid: d11fe48ce3b934cc48b356f604743140, type: 3}
       propertyPath: m_Camera
       value: 
@@ -5970,6 +5994,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: WaterBlock_50m
       objectReference: {fileID: 0}
+    - target: {fileID: 1507636620937791836, guid: 7097ba7ba649e1f41bba232312bdcbd8, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -6168,6 +6196,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Welcome-UI
       objectReference: {fileID: 0}
+    - target: {fileID: 7568815429807639495, guid: 00f61be2ee7da460dbd946b77b6cf317, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -6184,6 +6216,10 @@ PrefabInstance:
     - target: {fileID: 100000, guid: 7c9fb993626aaf8488be64eb9feadbbc, type: 3}
       propertyPath: m_Name
       value: Lava
+      objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: 7c9fb993626aaf8488be64eb9feadbbc, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 7c9fb993626aaf8488be64eb9feadbbc, type: 3}
       propertyPath: m_LocalScale.x
@@ -6253,6 +6289,10 @@ PrefabInstance:
     - target: {fileID: 4963383769722804678, guid: e257c7cbe6b7c499897f506893a620a0, type: 3}
       propertyPath: m_Name
       value: UML-UI-Dome
+      objectReference: {fileID: 0}
+    - target: {fileID: 4963383769722804678, guid: e257c7cbe6b7c499897f506893a620a0, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5855069774587120592, guid: e257c7cbe6b7c499897f506893a620a0, type: 3}
       propertyPath: m_Camera
